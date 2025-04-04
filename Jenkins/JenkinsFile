@@ -14,20 +14,14 @@ pipeline {
 
         stage('Compile') {
             steps {
-                dir('Jenkins') {  // Navigate to the "Jenkins" folder
-                    sh 'mvn compile'
-                }
+                sh 'mvn compile'
             }
         }
 
         stage('Build') {
             steps {
-                dir('Jenkins') {  
-                    sh 'mvn clean package'
-                }
+                sh 'mvn clean package'
             }
         }
     }
 }
-
-    
