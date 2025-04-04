@@ -1,28 +1,33 @@
-pipeline{ 
+pipeline { 
     agent any
-        tools{
-            maven 'maven'
-            jdk 'java-11'
-        }
+    tools {
+        maven 'maven'
+        jdk 'java-11'
+    }
 
-    stages{ 
-           stage('git-checkout'){
-            steps{
+    stages { 
+        stage('Git Checkout') {
+            steps {
                 git branch: 'main', url: 'https://github.com/Swathi971/trail.git'
             }
-           } 
+        } 
 
-           stage('compile'){
-            steps{
-                sh 'mvn compile'
+        stage('Compile') {
+            steps {
+                dir('Jenkins') {  // Navigate to the "Jenkins" folder
+                    sh 'mvn compile'
+                }
             }
-           }
+        }
 
-            stage('build'){
-                steps{
+        stage('Build') {
+            steps {
+                dir('Jenkins') {  
                     sh 'mvn clean package'
                 }
             }
-           }
-        } 
+        }
+    }
+}
+
     
